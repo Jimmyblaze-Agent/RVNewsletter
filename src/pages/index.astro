@@ -1,11 +1,122 @@
 ---
-import Welcome from '../components/Welcome.astro';
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="RV Nomad News - Free Boondocking Guide!">
+	<header class="bg-gray-900 text-white py-20 px-4 sm:px-6 lg:px-8 bg-cover bg-center text-center relative" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&q=80');">
+		<div class="max-w-4xl mx-auto relative z-10">
+			<h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
+				Unlock the Best Free RV Spots!
+			</h1>
+			<p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">
+				Get your FREE PDF: "100 Best Free Boondocking Spots"
+			</p>
+			
+			<div class="bg-white rounded-xl shadow-2xl p-8 max-w-md mx-auto text-gray-900 text-left">
+				<h2 class="text-2xl font-bold mb-2 text-center text-blue-600">Where should we send it?</h2>
+				<p class="text-gray-600 text-sm mb-6 text-center">Join 5,000+ RVers getting the best off-grid tips.</p>
+				
+				<form id="email-capture-form" class="space-y-4">
+					<div>
+						<label for="email" class="sr-only">Email address</label>
+						<input id="email" name="email" type="email" autocomplete="email" required class="appearance-none rounded-lg relative block w-full px-4 py-3 border border-gray-300 placeholder-gray-500 text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 focus:z-10 sm:text-base" placeholder="Enter your best email">
+					</div>
+					<div>
+						<button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-bold rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors shadow-lg">
+							YES! Send Me My Free Guide!
+						</button>
+					</div>
+					<div id="form-message" class="hidden text-center text-sm font-medium mt-2"></div>
+				</form>
+				<p class="mt-4 text-xs text-center text-gray-500">We respect your privacy. No spam, ever. Unsubscribe anytime.</p>
+			</div>
+		</div>
+	</header>
+
+	<main class="flex-grow py-16 px-4 sm:px-6 lg:px-8 bg-white">
+		<div class="max-w-3xl mx-auto">
+			<div class="text-center mb-12">
+				<h2 class="text-3xl font-bold text-gray-900">Discover Secluded Paradise & Save Money</h2>
+			</div>
+			
+			<div class="space-y-6 text-lg text-gray-700">
+				<div class="flex items-start">
+					<div class="flex-shrink-0">
+						<svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+						</svg>
+					</div>
+					<p class="ml-3">Find breathtaking, legal campsites without dropping $50/night.</p>
+				</div>
+				<div class="flex items-start">
+					<div class="flex-shrink-0">
+						<svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+						</svg>
+					</div>
+					<p class="ml-3">Expert-curated list with exact GPS coordinates & local cell service tips.</p>
+				</div>
+				<div class="flex items-start">
+					<div class="flex-shrink-0">
+						<svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+						</svg>
+					</div>
+					<p class="ml-3">Avoid crowded campgrounds and embrace true freedom on BLM land.</p>
+				</div>
+				<div class="flex items-start">
+					<div class="flex-shrink-0">
+						<svg class="h-6 w-6 text-green-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
+						</svg>
+					</div>
+					<p class="ml-3">Instantly downloadable PDF for offline access when you have zero bars.</p>
+				</div>
+			</div>
+		</div>
+	</main>
+
+	<footer class="bg-gray-800 py-8 text-center">
+		<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+			<p class="text-gray-400 text-sm">&copy; 2026 RV Nomad News. All rights reserved.</p>
+		</div>
+	</footer>
 </Layout>
+
+<script>
+	document.addEventListener('DOMContentLoaded', () => {
+		const form = document.getElementById('email-capture-form') as HTMLFormElement;
+		const messageEl = document.getElementById('form-message');
+		const submitBtn = form?.querySelector('button[type="submit"]') as HTMLButtonElement;
+
+		if (form && messageEl && submitBtn) {
+			form.addEventListener('submit', async (e) => {
+				e.preventDefault();
+				const email = (document.getElementById('email') as HTMLInputElement).value;
+				
+				// UI feedback
+				submitBtn.disabled = true;
+				submitBtn.innerText = "Sending...";
+				messageEl.classList.remove('hidden', 'text-green-600', 'text-red-600');
+				
+				try {
+					// In production, this points to your Vercel Edge API route (e.g., /api/subscribe)
+					// For now, we simulate a successful API call
+					await new Promise(resolve => setTimeout(resolve, 800)); 
+					
+					form.reset();
+					messageEl.innerText = "Success! Check your email for the guide.";
+					messageEl.classList.add('text-green-600');
+					messageEl.classList.remove('hidden');
+					submitBtn.innerText = "Guide Sent!";
+				} catch (error) {
+					messageEl.innerText = "Oops! Something went wrong. Try again.";
+					messageEl.classList.add('text-red-600');
+					messageEl.classList.remove('hidden');
+					submitBtn.disabled = false;
+					submitBtn.innerText = "YES! Send Me My Free Guide!";
+				}
+			});
+		}
+	});
+</script>
