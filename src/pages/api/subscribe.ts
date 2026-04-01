@@ -143,7 +143,7 @@ You received this because you signed up at rv-newsletter.vercel.app
 Unsubscribe anytime by replying with "unsubscribe".`;
 
   try {
-    const apiUrl = `https://api.agentmail.to/v0/inboxes/${inboxId}/messages`;
+    const apiUrl = `https://api.agentmail.to/v0/inboxes/${inboxId}/messages/send`;
 
     const agentMailResponse = await fetch(apiUrl, {
       method: 'POST',
