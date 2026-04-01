@@ -36,8 +36,8 @@ export const POST: APIRoute = async ({ request }) => {
     );
   }
 
-  const apiKey = import.meta.env.AGENTMAIL_API_KEY;
-  const inboxId = import.meta.env.AGENTMAIL_INBOX_ID;
+  const apiKey = import.meta.env.AGENTMAIL_API_KEY ?? process.env.AGENTMAIL_API_KEY;
+  const inboxId = import.meta.env.AGENTMAIL_INBOX_ID ?? process.env.AGENTMAIL_INBOX_ID;
 
   if (!apiKey || !inboxId) {
     console.error('[subscribe] Missing AGENTMAIL_API_KEY or AGENTMAIL_INBOX_ID env vars');
