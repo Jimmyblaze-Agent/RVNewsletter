@@ -4,6 +4,44 @@ export const prerender = false;
 
 const EMAIL_REGEX = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
 
+// ─── Beehiiv helper ──────────────────────────────────────────────────────────
+async function addToBeehiiv(email: string): Promise<void> {
+  const beehiivApiKey = import.meta.env.BEEHIIV_API_KEY ?? process.env.BEEHIIV_API_KEY;
+  const beehiivPubId = import.meta.env.BEEHIIV_PUBLICATION_ID ?? process.env.BEEHIIV_PUBLICATION_ID;
+
+  if (!beehiivApiKey || !beehiivPubId) {
+    console.warn('[subscribe] Beehiiv env vars not set — skipping Beehiiv sync');
+    return;
+  }
+
+  const res = await fetch(
+    `https://api.beehiiv.com/v2/publications/${beehiivPubId}/subscriptions`,
+    {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${beehiivApiKey}`,
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        email,
+        reactivate_existing: false,
+        send_welcome_email: false, // AgentMail handles welcome email
+        utm_source: 'rv-newsletter.vercel.app',
+        utm_medium: 'organic',
+      }),
+    }
+  );
+
+  if (!res.ok) {
+    const body = await res.text();
+    console.error(`[subscribe] Beehiiv API error ${res.status}:`, body);
+    // Non-fatal — do not rethrow; let the main flow succeed
+  } else {
+    console.log(`[subscribe] Beehiiv subscriber created/updated for: ${email}`);
+  }
+}
+// ─────────────────────────────────────────────────────────────────────────────
+
 export const POST: APIRoute = async ({ request }) => {
   const headers = { 'Content-Type': 'application/json' };
 
@@ -169,6 +207,13 @@ Unsubscribe anytime by replying with "unsubscribe".`;
     }
 
     console.log(`[subscribe] Welcome email sent successfully to: ${trimmedEmail}`);
+
+    // ── Fire-and-forget Beehiiv sync (non-blocking, non-fatal) ──────────────
+    addToBeehiiv(trimmedEmail).catch((err) => {
+      console.error('[subscribe] Beehiiv sync threw unexpectedly:', err);
+    });
+    // ────────────────────────────────────────────────────────────────────────
+
     return new Response(
       JSON.stringify({ success: true }),
       { status: 200, headers }
