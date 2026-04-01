@@ -100,8 +100,8 @@ import Layout from '../layouts/Layout.astro';
 				messageEl.classList.remove('hidden', 'text-green-600', 'text-red-600');
 				
 				try {
-					// Actual API Connection to the Python Webhook
-					const response = await fetch('http://207.148.10.162:5000/api/subscribe', {
+					// Native Astro API endpoint (replaced Python webhook)
+					const response = await fetch('/api/subscribe', {
 						method: 'POST',
 						headers: { 'Content-Type': 'application/json' },
 						body: JSON.stringify({ email })
