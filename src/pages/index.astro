@@ -2,19 +2,19 @@
 import Layout from '../layouts/Layout.astro';
 ---
 
-<Layout title="RV Nomad News - Free Boondocking Guide!">
+<Layout title="100 free boondocking spots with GPS coordinates. Free PDF for RVers.">
 	<header class="bg-gray-900 text-white py-20 px-4 sm:px-6 lg:px-8 bg-cover bg-center text-center relative" style="background-image: linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.6)), url('https://images.unsplash.com/photo-1523987355523-c7b5b0dd90a7?auto=format&fit=crop&q=80');">
 		<div class="max-w-4xl mx-auto relative z-10">
 			<h1 class="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight mb-4">
-				Unlock the Best Free RV Spots!
+				100 free campsites. GPS coordinates included. No campground fees.
 			</h1>
 			<p class="text-xl md:text-2xl text-gray-200 mb-8 max-w-2xl mx-auto">
-				Get your FREE PDF: "100 Best Free Boondocking Spots"
+				A curated PDF for RVers who'd rather spend that $50/night on diesel.
 			</p>
 			
 			<div class="bg-white rounded-xl shadow-2xl p-8 max-w-md mx-auto text-gray-900 text-left">
 				<h2 class="text-2xl font-bold mb-2 text-center text-blue-600">Where should we send it?</h2>
-				<p class="text-gray-600 text-sm mb-6 text-center">Join 5,000+ RVers getting the best off-grid tips.</p>
+				<p class="text-gray-600 text-sm mb-6 text-center">5,000+ RVers already have it. Get yours in 60 seconds.</p>
 				
 				<form id="email-capture-form" class="space-y-4">
 					<div>
@@ -23,7 +23,7 @@ import Layout from '../layouts/Layout.astro';
 					</div>
 					<div>
 						<button type="submit" class="group relative w-full flex justify-center py-3 px-4 border border-transparent text-lg font-bold rounded-lg text-white bg-green-600 hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-green-500 transition-colors shadow-lg">
-							YES! Send Me My Free Guide!
+							Send me the free guide
 						</button>
 					</div>
 					<div id="form-message" class="hidden text-center text-sm font-medium mt-2"></div>
@@ -36,7 +36,7 @@ import Layout from '../layouts/Layout.astro';
 	<main class="flex-grow py-16 px-4 sm:px-6 lg:px-8 bg-white">
 		<div class="max-w-3xl mx-auto">
 			<div class="text-center mb-12">
-				<h2 class="text-3xl font-bold text-gray-900">Discover Secluded Paradise & Save Money</h2>
+				<h2 class="text-3xl font-bold text-gray-900">What's actually in the guide</h2>
 			</div>
 			
 			<div class="space-y-6 text-lg text-gray-700">
@@ -46,7 +46,7 @@ import Layout from '../layouts/Layout.astro';
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 						</svg>
 					</div>
-					<p class="ml-3">Find breathtaking, legal campsites without dropping $50/night.</p>
+					<p class="ml-3">100 legal campsites — most with no nightly fee.</p>
 				</div>
 				<div class="flex items-start">
 					<div class="flex-shrink-0">
@@ -54,7 +54,7 @@ import Layout from '../layouts/Layout.astro';
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 						</svg>
 					</div>
-					<p class="ml-3">Expert-curated list with exact GPS coordinates & local cell service tips.</p>
+					<p class="ml-3">GPS coordinates for every spot, plus cell signal notes so you're not guessing.</p>
 				</div>
 				<div class="flex items-start">
 					<div class="flex-shrink-0">
@@ -62,7 +62,7 @@ import Layout from '../layouts/Layout.astro';
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 						</svg>
 					</div>
-					<p class="ml-3">Avoid crowded campgrounds and embrace true freedom on BLM land.</p>
+					<p class="ml-3">Mostly BLM land — no reservations, no check‑in times, no neighbors 10 feet away.</p>
 				</div>
 				<div class="flex items-start">
 					<div class="flex-shrink-0">
@@ -70,7 +70,7 @@ import Layout from '../layouts/Layout.astro';
 							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7" />
 						</svg>
 					</div>
-					<p class="ml-3">Instantly downloadable PDF for offline access when you have zero bars.</p>
+					<p class="ml-3">Downloads to your phone. Works offline. Useful exactly when you need it.</p>
 				</div>
 			</div>
 		</div>
@@ -119,7 +119,7 @@ import Layout from '../layouts/Layout.astro';
 					messageEl.classList.add('text-red-600');
 					messageEl.classList.remove('hidden');
 					submitBtn.disabled = false;
-					submitBtn.innerText = "YES! Send Me My Free Guide!";
+					submitBtn.innerText = "Send me the free guide";
 				}
 			});
 		}
